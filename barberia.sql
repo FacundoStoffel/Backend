@@ -47,9 +47,12 @@ CREATE TABLE RESERVAS
   id_corte INT  NOT NULL,
   id_pago INT  NOT NULL,
   cancelada BOOLEAN NOT NULL,
+  -- index (fecha, hora),
   PRIMARY KEY (id_reserva),
   FOREIGN KEY (id_usuario) REFERENCES USUARIO(id_usuario),
   FOREIGN KEY (id_corte) REFERENCES TIPO_CORTE(id_corte),
   FOREIGN KEY (hora) REFERENCES HORARIO(hora),
   FOREIGN KEY (id_pago) REFERENCES METODO_PAGO(id_pago)
 );
+
+ALTER TABLE reservas ADD UNIQUE INDEX hora_unica (fecha,hora);

@@ -1,6 +1,7 @@
 require('rootpath')();
 const mysql = require('mysql');
 const config = require("config.json");
+const bcrypt = require('bcrypt');
 
 
 var user_db = {};
@@ -29,11 +30,12 @@ user_db.getAll = function (funCallback) {
 };
 
 user_db.create = function (user, funCallback) {
+    let claveCifrada = bcrypt.hashSync(user.contrasena, 10);
     params = [
         user.nombre,
         user.apellido,
         user.mail,
-        user.contrasena
+        claveCifrada
     ];
 
     $query = 'INSERT INTO usuario (nombre, apellido, mail, contrasena, id_rol) VALUES (?,?,?,?,2)';
@@ -62,12 +64,13 @@ user_db.create = function (user, funCallback) {
 };
 
 user_db.edit = function (user, id_usuario , funcallback) {
+    let claveCifrada = bcrypt.hashSync(user.contrasena, 10);
 
     params = [
         user.nombre,
         user.apellido,
         user.mail,
-        user.contrasena,
+        claveCifrada,
         id_usuario
     ];
 
@@ -123,5 +126,28 @@ user_db.delete = function (id_usuario, funCallback) {
     });
 };
 
+
+user_db.findByMail = function (mail, funCallback) {
+    var consulta = 'SELECT * FROM usuario WHERE mail = ?';
+    connection.query(consulta, mail, function (err, result) {
+        if (err) {
+            funCallback(err);
+            return;
+        } else {
+
+            if (result.length > 0) {
+                funCallback(undefined, {
+                    message: `Usuario encontrado`,
+                    detail: result[0]
+                });
+            } else {
+                funCallback({
+                    message: "No existe un usuario que coincida con el criterio de busqueda",
+                    detail: result
+                });
+            }
+        }
+    });
+}
 
 module.exports = user_db;
