@@ -17,6 +17,7 @@ connection.connect((err) => {
 });
 
 
+
 user_db.getAll = function (funCallback) {
     $query = 'SELECT * from usuario';
 
