@@ -4,18 +4,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const user_db = require("./../model/user.js")
-const securityController = require("./securityController.js");
+const hora_db = require("./../model/hora.js")
 
-//rutas del endpoint
 app.get('/', getAll);
-app.post('/register', createUser);
-app.put('/edit/:id_usuario', securityController.verificarToken, editUser);
-app.delete('/delete/:id_usuario', securityController.verificarToken, deleteUser);
+app.post('/create', createHora);
+app.put('/edit/:hora', editHora);
+app.delete('/delete/:hora', deleteHora);
 
-//funciones de los endpoints
 function getAll(req, res){
-    user_db.getAll((err, result) => {
+    hora_db.getAll((err, result) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -24,11 +21,10 @@ function getAll(req, res){
     });
 };
 
+function createHora(req, res) {
 
-function createUser(req, res) {
-
-    let user_register = req.body;
-    user_db.create(user_register, (err, result)=>{
+    let horaCreada = req.body;
+    hora_db.create(horaCreada, (err, result)=>{
         if(err){
             res.status(500).send(err);
         }else{
@@ -38,23 +34,22 @@ function createUser(req, res) {
 
 };
 
-function editUser(req, res) {
+function editHora(req, res) {
 
-    let user_edit = req.body;
-    let id_usuario = req.params.id_usuario;
-    user_db.edit(user_edit, id_usuario, (err, result)=>{
+    let hora_edit = req.body;
+    let hora = req.params.hora;
+    hora_db.edit(hora_edit, hora, (err, result)=>{
         if(err){
             res.status(500).send(err);
         }else{
             res.json(result);
         }
     });
-
 };
 
-function deleteUser(req, res){
-    let id_usuario = req.params.id_usuario;
-    user_db.delete(id_usuario, (err, result)=>{
+function deleteHora(req, res){
+    let hora = req.params.hora;
+    hora_db.delete(hora, (err, result)=>{
         if (err) {
             res.status(500).send(err);
         } else {

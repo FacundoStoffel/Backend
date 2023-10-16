@@ -5,8 +5,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const reservas_db = require("./../model/reservas.js");
+const securityController = require("./securityController.js");
 
-app.get('/', getAll);
+app.get('/', securityController.verificarToken, getAll);
 app.post('/create', createReserva);
 app.put('/edit/:id_reserva', editReserva);
 app.delete('/delete/:id_reserva', deleteReserva);

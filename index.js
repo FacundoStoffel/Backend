@@ -16,10 +16,13 @@ const config = require("config.json");
 const controllerUser = require("./controller/userController.js");
 const controllerReservas = require("./controller/reservasController.js");
 const securityController = require("./controller/securityController.js");
+const controllerHora = require("./controller/horaController.js");
+
 
 app.use('/user', controllerUser);
 app.use('/reservas', controllerReservas);
 app.use('/security', securityController.app);
+app.use('/hora', controllerHora);
 
 
 //funcion para indicar que el servidor arranco o no
