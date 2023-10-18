@@ -12,7 +12,7 @@ app.put('/edit/:hora', editHora);
 app.delete('/delete/:hora', deleteHora);
 
 function getAll(req, res){
-    hora_db.getAll((err, result) => {
+    hora_db.getAll( function (err, result) {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -20,6 +20,8 @@ function getAll(req, res){
         }
     });
 };
+
+
 
 function createHora(req, res) {
 

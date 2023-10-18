@@ -24,8 +24,6 @@ function login(req, res) {
                     mail: result.detail.mail
                     
                 }
-                //JSON WEB TOKEN
-                // devolvemos un json en forma de token (que basicamente es un string cifrado)
 
                 jwt.sign(user, 'siliconSectret', { expiresIn: '600s' }, (err, token) => {
                     if (err) {

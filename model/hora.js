@@ -19,10 +19,14 @@ hora_db.getAll = function (funCallback) {
 
     connection.query($query, function (err, rows) {
         if (err) {
-            funCallback(err);
-            return;
+            funCallback({
+                message: "Ah ocurrido un error al listar",
+                detail: err
+            });
+            
+        }else {
+            funCallback(undefined, rows);
         }
-        funCallback(rows);
     });
 };
 
