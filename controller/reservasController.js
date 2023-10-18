@@ -22,18 +22,31 @@ function getAll(req, res){
     });
 };
 
-function createReserva(req, res) {
+// function createReserva(req, res) {
 
+//     let reserva_register = req.body;
+//     reservas_db.create(reserva_register, (err, result)=>{
+//         if(err){
+//             res.status(500).send(err);
+//         }else{
+//             res.json(result);
+//         }
+//     });
+
+// };
+
+function createReserva(req, res) {
     let reserva_register = req.body;
-    reservas_db.create(reserva_register, (err, result)=>{
-        if(err){
-            res.status(500).send(err);
-        }else{
-            res.json(result);
+    reservas_db.create(reserva_register, (err, result) => {
+        if (err) {
+            console.error('Error al crear reserva:', err);
+            res.status(500).send({ message: 'Error al crear reserva', error: err });
+        } else {
+            console.log('Reserva creada exitosamente:', result);
+            res.json({ message: 'Reserva creada exitosamente', reserva: result });
         }
     });
-
-};
+}
 
 function editReserva(req, res) {
 

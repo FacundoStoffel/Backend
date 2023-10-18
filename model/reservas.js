@@ -40,10 +40,10 @@ reservas_db.create = function (reserva, funCallback) {
         reserva.id_usuario,
         reserva.id_corte,
         reserva.id_pago,
-        reserva.cancelada
+
     ];
 
-    $query = 'INSERT INTO reservas (fecha, hora, id_usuario, id_corte, id_pago, cancelada) VALUES (?,?,?,?,?,?)';
+    $query = 'INSERT INTO reservas (fecha, hora, id_usuario, id_corte, id_pago, cancelada) VALUES (?,?,?,?,?,false)';
 
     connection.query($query, params, (err, rows) => {
         if (err) {

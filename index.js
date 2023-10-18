@@ -17,12 +17,16 @@ const controllerUser = require("./controller/userController.js");
 const controllerReservas = require("./controller/reservasController.js");
 const securityController = require("./controller/securityController.js");
 const controllerHora = require("./controller/horaController.js");
+const controllerCorte = require("./controller/corteController.js");
+const controllerPago = require("./controller/pagoController.js");
 
 
 app.use('/user', controllerUser);
 app.use('/reservas', controllerReservas);
 app.use('/security', securityController.app);
 app.use('/hora', controllerHora);
+app.use('/corte', controllerCorte);
+app.use('/pago', controllerPago);
 
 
 //funcion para indicar que el servidor arranco o no
