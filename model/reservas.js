@@ -14,6 +14,16 @@ connection.connect((err) => {
 });
 
 
+convertirFecha = (date) => {
+    const fecha = new Date(date);
+    const dia = fecha.getUTCDate().toString().padStart(2, '0');
+    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getUTCFullYear();
+    return `${anio}-${mes}-${dia}`;
+}
+
+
+
 
 reservas_db.getAll = function (funCallback) {
     $query = 'SELECT * from reservas';
@@ -35,7 +45,7 @@ reservas_db.getAll = function (funCallback) {
 
 reservas_db.create = function (reserva, funCallback) {
     params = [
-        reserva.fecha,
+        convertirFecha(reserva.fecha),
         reserva.hora,
         reserva.id_usuario,
         reserva.id_corte,

@@ -22,11 +22,10 @@ function login(req, res) {
                 let user = {
                     nombre: result.detail.nombre,
                     mail: result.detail.mail,
-                    id_usuario: result.detail.id_usuario
                     
                 }
 
-                jwt.sign(user, 'siliconSectret', { expiresIn: '600s' }, (err, token) => {
+                jwt.sign(user, 'siliconSectret', { expiresIn: '60000000s' }, (err, token) => {
                     if (err) {
                         res.status(500).send({
                             message: err
