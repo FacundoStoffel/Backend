@@ -9,6 +9,7 @@ const securityController = require("./securityController.js");
 
 //rutas del endpoint
 app.get('/', getAll);
+app.get('/:mail', getUserbyMail);
 app.post('/register', createUser);
 app.put('/edit/:id_usuario', securityController.verificarToken, editUser);
 app.delete('/delete/:id_usuario', securityController.verificarToken, deleteUser);
@@ -66,6 +67,18 @@ function deleteUser(req, res){
         }
     })
 }
+
+function getUserbyMail(req, res){
+    let mail = req.params.mail
+    user_db.getUserbyMail(mail, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(result);
+        }
+    });
+};
+
 
 
 module.exports = app;

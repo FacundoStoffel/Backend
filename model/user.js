@@ -151,4 +151,18 @@ user_db.findByMail = function (mail, funCallback) {
     });
 }
 
+user_db.getUserbyMail = function (mail, funCallback) {
+ 
+     var consulta = 'SELECT id_usuario from usuario where mail = ?';
+
+    connection.query(consulta, mail, function (err, result) {
+        if (err) {
+            funCallback(err);
+        }
+            funCallback(undefined, result);
+        
+        
+    });
+};
+
 module.exports = user_db;
