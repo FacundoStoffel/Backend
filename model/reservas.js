@@ -26,8 +26,8 @@ convertirFecha = (date) => {
 
 
 reservas_db.getAll = function (funCallback) {
-    $query = 'SELECT * from reservas';
-
+//$query = 'SELECT * from reservas';
+$query = 'SELECT reservas.fecha, horario.hora, CONCAT(usuario.nombre , " ", usuario.apellido) AS nombre_completo, tipo_corte.corte_tipo, metodo_pago.metodo FROM reservas INNER JOIN horario ON reservas.hora = horario.hora INNER JOIN usuario ON reservas.id_usuario = usuario.id_usuario INNER JOIN tipo_corte ON reservas.id_corte = tipo_corte.id_corte INNER JOIN metodo_pago ON reservas.id_pago = metodo_pago.id_pago order by reservas.fecha asc'
     connection.query($query, function (err, rows) {
         if (err) {
             funCallback({
