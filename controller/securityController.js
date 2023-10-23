@@ -22,7 +22,7 @@ function login(req, res) {
                 let user = {
                     nombre: result.detail.nombre,
                     mail: result.detail.mail,
-                    
+                    rol: result.detail.nombre_rol
                 }
 
                 jwt.sign(user, 'siliconSectret', { expiresIn: '60000000s' }, (err, token) => {

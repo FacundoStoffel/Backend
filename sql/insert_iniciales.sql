@@ -5,7 +5,7 @@ insert into rol(nombre_rol)values ('Cliente');
 
 -- la contra es 1234
 insert into usuario(mail,nombre,contrasena,apellido,id_rol) values
-('facu@gmail.com','Facu','$2b$10$sOd4aVQePkSgLufprvY3.eOmoqQFDkS.hCjzM9ANqobBo4pOwBlvO','Stoffel',1);
+('admin@gmail.com','Admin','$2b$10$sOd4aVQePkSgLufprvY3.eOmoqQFDkS.hCjzM9ANqobBo4pOwBlvO','Stoffel',1);
 
 insert into tipo_corte(corte_tipo, precio) values
 ('corte','1500'),('barba','500'),('corte_barba','2000');

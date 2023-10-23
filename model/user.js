@@ -129,7 +129,8 @@ user_db.delete = function (id_usuario, funCallback) {
 
 
 user_db.findByMail = function (mail, funCallback) {
-    var consulta = 'SELECT * FROM usuario WHERE mail = ?';
+//var consulta = 'SELECT * FROM usuario WHERE mail = ?';
+var consulta = 'Select usuario.*, rol.nombre_rol FROM usuario INNER JOIN rol ON usuario.id_rol = rol.id_rol AND usuario.mail = ?'
     connection.query(consulta, mail, function (err, result) {
         if (err) {
             funCallback(err);
