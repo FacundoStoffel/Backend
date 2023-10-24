@@ -5,9 +5,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const pago_db = require("./../model/pago.js")
+const securityController = require("./securityController.js");
 
 
-app.get('/', getAll)
+app.get('/',securityController.verificarToken, getAll)
 
 
 function getAll(req, res){

@@ -5,9 +5,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corte_db = require("./../model/corte.js")
+const securityController = require("./securityController.js");
 
 
-app.get('/', getAll)
+app.get('/',securityController.verificarToken, getAll)
 
 
 function getAll(req, res){

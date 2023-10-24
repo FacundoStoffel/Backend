@@ -8,10 +8,10 @@ const reservas_db = require("./../model/reservas.js");
 const securityController = require("./securityController.js");
 
 app.get('/', securityController.verificarToken, getAll);
-app.post('/create', createReserva);
-app.put('/edit/:id_reserva', editReserva);
-app.put('/cancelar/:id_reserva', cancelar)
-app.delete('/delete/:id_reserva', deleteReserva);
+app.post('/create',securityController.verificarToken, createReserva);
+app.put('/edit/:id_reserva',securityController.verificarToken, editReserva);
+app.put('/cancelar/:id_reserva',securityController.verificarToken, cancelar)
+app.delete('/delete/:id_reserva',securityController.verificarToken, deleteReserva);
 
 function getAll(req, res){
     reservas_db.getAll((err, result) => {
@@ -68,15 +68,18 @@ function deleteReserva(req, res){
     reservas_db.delete(id_reserva, (err, result)=>{
         if (err) {
             res.status(500).send(err);
-        } else {
+        }
+         else {
             if (result_model.detail.affectedRows == 0) {
                 res.status(404).send(result_model.message);
-            } else {
+            } 
+            else {
                 res.send(result_model.message);
             }
         }
     })
 }
+
 
 function cancelar(req, res) {
     let id_reserva = req.params.id_reserva;

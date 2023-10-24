@@ -5,12 +5,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const hora_db = require("./../model/hora.js")
+const securityController = require("./securityController.js");
 
-app.get('/', getAll);
-app.get('/:hora', getByHora)
-app.post('/create', createHora);
-app.put('/edit/:hora', editHora);
-app.delete('/delete/:hora', deleteHora);
+app.get('/',securityController.verificarToken, getAll);
+app.get('/:hora',securityController.verificarToken, getByHora)
+app.post('/create',securityController.verificarToken, createHora);
+app.put('/edit/:hora',securityController.verificarToken, editHora);
+app.delete('/delete/:hora',securityController.verificarToken, deleteHora);
 
 function getAll(req, res){
     hora_db.getAll( function (err, result) {

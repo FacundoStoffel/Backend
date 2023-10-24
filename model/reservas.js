@@ -130,11 +130,13 @@ reservas_db.delete = function (id_reserva, funCallback) {
             return;
         } else {
             if (rows.affectedRows == 0) {
-                funCallback({
+                funCallback(
+                    {
                     message: "No se encontro la reserva: " + id_reserva,
                 });
             } else {
-                funCallback({
+                funCallback(
+                    {
                     message: `Se elimino la reserva ${id_reserva}`,
                     detail: rows
                 });
