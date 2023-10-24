@@ -7,6 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 const hora_db = require("./../model/hora.js")
 
 app.get('/', getAll);
+app.get('/:hora', getByHora)
 app.post('/create', createHora);
 app.put('/edit/:hora', editHora);
 app.delete('/delete/:hora', deleteHora);
@@ -63,6 +64,16 @@ function deleteHora(req, res){
         }
     })
 }
+
+function getByHora(req, res){
+    hora_db.getByHora( function (err, result) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(result);
+        }
+    });
+};
 
 
 module.exports = app;

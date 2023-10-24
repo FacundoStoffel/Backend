@@ -118,6 +118,22 @@ hora_db.delete = function (hora, funCallback) {
     });
 };
 
+hora_db.getByHora = function (hora, funCallback) {
+    $query = 'SELECT * from horario WHERE hora=?';
+
+    connection.query($query,hora, function (err, rows) {
+        if (err) {
+            funCallback({
+                message: "Ah ocurrido un error al listar",
+                detail: err
+            });
+            
+        }else {
+            funCallback(undefined, rows);
+        }
+    });
+};
+
 
 
 module.exports = hora_db;

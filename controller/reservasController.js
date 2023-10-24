@@ -10,6 +10,7 @@ const securityController = require("./securityController.js");
 app.get('/', securityController.verificarToken, getAll);
 app.post('/create', createReserva);
 app.put('/edit/:id_reserva', editReserva);
+app.put('/cancelar/:id_reserva', cancelar)
 app.delete('/delete/:id_reserva', deleteReserva);
 
 function getAll(req, res){
@@ -75,6 +76,21 @@ function deleteReserva(req, res){
             }
         }
     })
+}
+
+function cancelar(req, res) {
+    let id_reserva = req.params.id_reserva;
+    reservas_db.cancelarReserva(id_reserva, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            if (result.detail.affectedRows == 0) {
+                res.status(404).send(result.message);
+            } else {
+                res.send(result);
+            }
+        }
+    });
 }
 
 module.exports = app;

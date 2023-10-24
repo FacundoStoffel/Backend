@@ -27,7 +27,7 @@ convertirFecha = (date) => {
 
 reservas_db.getAll = function (funCallback) {
 //$query = 'SELECT * from reservas';
-$query = 'SELECT reservas.fecha, horario.hora, CONCAT(usuario.nombre , " ", usuario.apellido) AS nombre_completo, tipo_corte.corte_tipo, metodo_pago.metodo FROM reservas INNER JOIN horario ON reservas.hora = horario.hora INNER JOIN usuario ON reservas.id_usuario = usuario.id_usuario INNER JOIN tipo_corte ON reservas.id_corte = tipo_corte.id_corte INNER JOIN metodo_pago ON reservas.id_pago = metodo_pago.id_pago order by reservas.fecha asc'
+$query = 'SELECT reservas.*, horario.hora, CONCAT(usuario.nombre , " ", usuario.apellido) AS nombre_completo, tipo_corte.corte_tipo, metodo_pago.metodo FROM reservas INNER JOIN horario ON reservas.hora = horario.hora INNER JOIN usuario ON reservas.id_usuario = usuario.id_usuario INNER JOIN tipo_corte ON reservas.id_corte = tipo_corte.id_corte INNER JOIN metodo_pago ON reservas.id_pago = metodo_pago.id_pago  AND cancelada is false order by reservas.fecha ASC'
     connection.query($query, function (err, rows) {
         if (err) {
             funCallback({
@@ -82,16 +82,16 @@ reservas_db.create = function (reserva, funCallback) {
 reservas_db.edit = function (reserva, id_reserva , funcallback) {
 
     params = [
-        reserva.fecha,
+        convertirFecha(reserva.fecha),
         reserva.hora,
         reserva.id_usuario,
         reserva.id_corte,
         reserva.id_pago,
-        reserva.cancelada,
+        // reserva.cancelada,
         id_reserva
     ];
 
-    $query = 'UPDATE reservas set fecha=?, hora=?, id_usuario=?, id_corte=?, id_pago=?, cancelada=?  WHERE id_reserva=?';
+    $query = 'UPDATE reservas set fecha=?, hora=?, id_usuario=?, id_corte=?, id_pago=?  WHERE id_reserva=?';
 
     connection.query($query, params, (err, rows)=> {
         if (err) {
@@ -143,6 +143,32 @@ reservas_db.delete = function (id_reserva, funCallback) {
         }
     });
 };
+
+reservas_db.cancelarReserva = function (id_reserva, funCallback) {
+    consulta = "UPDATE reservas SET cancelada = true WHERE id_reserva = ?";
+    connection.query(consulta, id_reserva, (err, result) => {
+        if (err) {
+            funCallback({
+                message: err.code,
+                detail: err
+            });
+        } else {
+            if (result.affectedRows == 0) {
+                funCallback(undefined,
+                    {
+                        message: "no se encontro una reserva con el id ingresado",
+                        detail: result
+                    });
+            } else {
+                funCallback(undefined,
+                    {
+                        message: "Reserva cancelada con exito",
+                        detail: result
+                    });
+            }
+        }
+    });
+}
 
 
 module.exports = reservas_db;
