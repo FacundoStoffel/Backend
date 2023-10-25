@@ -8,7 +8,7 @@ const user_db = require("./../model/user.js")
 const securityController = require("./securityController.js");
 
 //rutas del endpoint
-app.get('/', getAll);
+app.get('/',securityController.verificarToken, getAll);
 app.get('/:mail', getUserbyMail);
 app.post('/register', createUser);
 app.put('/edit/:id_usuario', securityController.verificarToken, editUser);
@@ -24,6 +24,8 @@ function getAll(req, res){
         }
     });
 };
+
+
 
 
 function createUser(req, res) {

@@ -172,5 +172,21 @@ reservas_db.cancelarReserva = function (id_reserva, funCallback) {
     });
 }
 
+// reservas_db.getUser = function (id_usuario, funCallback) {
+//     //$query = 'SELECT * from reservas';
+//     $query = 'SELECT reservas.*, horario.hora, CONCAT(usuario.nombre , " ", usuario.apellido) AS nombre_completo, tipo_corte.corte_tipo, metodo_pago.metodo FROM reservas INNER JOIN horario ON reservas.hora = horario.hora INNER JOIN usuario ON reservas.id_usuario = usuario.id_usuario INNER JOIN tipo_corte ON reservas.id_corte = tipo_corte.id_corte INNER JOIN metodo_pago ON reservas.id_pago = metodo_pago.id_pago Where usuario.id_usuario = ?  AND cancelada is false order by reservas.fecha ASC '
+//         connection.query($query, id_usuario, function (err, rows) {
+//             if (err) {
+//                 funCallback({
+//                     message: "Ah ocurrido un error al listar",
+//                     detail: err
+//                 });
+                
+//             }else {
+//                 funCallback(undefined, rows);
+//             }
+//         });
+//     };
+
 
 module.exports = reservas_db;

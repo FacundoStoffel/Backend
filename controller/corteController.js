@@ -8,7 +8,7 @@ const corte_db = require("./../model/corte.js")
 const securityController = require("./securityController.js");
 
 
-app.get('/',securityController.verificarToken, getAll)
+app.get('/', getAll)
 
 
 function getAll(req, res){

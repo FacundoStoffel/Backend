@@ -1,17 +1,17 @@
-create database barberia;
+-- create database barberia;
 
 insert into rol(nombre_rol)values ('Admin');
 insert into rol(nombre_rol)values ('Cliente');
 
 -- la contra es 1234
 insert into usuario(mail,nombre,contrasena,apellido,id_rol) values
-('admin@gmail.com','Admin','$2b$10$sOd4aVQePkSgLufprvY3.eOmoqQFDkS.hCjzM9ANqobBo4pOwBlvO','Stoffel',1);
+('admin@gmail.com','Admin','$2b$10$sOd4aVQePkSgLufprvY3.eOmoqQFDkS.hCjzM9ANqobBo4pOwBlvO','',1);
 
 insert into tipo_corte(corte_tipo, precio) values
-('corte','1500'),('barba','500'),('corte_barba','2000');
+('Corte','1500'),('Barba','500'),('Corte y barba','2000');
 
 insert into metodo_pago(metodo) values
-('efectivo'), ('tarjeta');
+('Efectivo'), ('Tarjeta');
 
 insert into horario(hora) values
 ('08:00'),('08:30'),('09:00'),('09:30'),('10:00'),('10:30'),('11:00'),('11:30'),('12:00'),
@@ -23,5 +23,3 @@ select * from rol
 select * from tipo_corte
 select * from metodo_pago
 select * from horario
-
--- create database barberia

@@ -8,6 +8,7 @@ const reservas_db = require("./../model/reservas.js");
 const securityController = require("./securityController.js");
 
 app.get('/', securityController.verificarToken, getAll);
+// app.get('/:id_usuario', getUser);
 app.post('/create',securityController.verificarToken, createReserva);
 app.put('/edit/:id_reserva',securityController.verificarToken, editReserva);
 app.put('/cancelar/:id_reserva',securityController.verificarToken, cancelar)
@@ -22,6 +23,17 @@ function getAll(req, res){
         }
     });
 };
+
+// function getUser(req, res){
+//     let id_reserva = req.params.id_reserva;
+//     reservas_db.getUser(id_reserva,(err, result) => {
+//         if (err) {
+//             res.status(500).send(err);
+//         } else {
+//             res.json(result);
+//         }
+//     });
+// };
 
 // function createReserva(req, res) {
 

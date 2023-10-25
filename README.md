@@ -10,3 +10,6 @@ con el frontend.
 Para iniciar el repositorio abrir la temrinal en la carpeta central y luego ejecutar el comando npm install
 para que se instalen todas las dependencias necesarias. Luego ejecutar el comando nodemon ./index.js o en su defecto
 node ./index.js
+
+- workbech version 8.0.36
+- Nodejs v18.16.0

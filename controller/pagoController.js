@@ -8,7 +8,7 @@ const pago_db = require("./../model/pago.js")
 const securityController = require("./securityController.js");
 
 
-app.get('/',securityController.verificarToken, getAll)
+app.get('/', getAll)
 
 
 function getAll(req, res){

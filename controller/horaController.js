@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 const hora_db = require("./../model/hora.js")
 const securityController = require("./securityController.js");
 
-app.get('/',securityController.verificarToken, getAll);
+app.get('/', getAll);
 app.get('/:hora',securityController.verificarToken, getByHora)
 app.post('/create',securityController.verificarToken, createHora);
 app.put('/edit/:hora',securityController.verificarToken, editHora);
