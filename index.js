@@ -35,11 +35,19 @@ app.use('/pago', controllerPago);
 
 
 //funcion para indicar que el servidor arranco o no
-app.listen(config.server.port, (err) => {
+// app.listen(config.server.port, (err) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log('servidor escuchando en el puerto ' + config.server.port)
+//     }
+// });
+
+app.listen(port, (err) => {
     if (err) {
         console.log(err);
     } else {
-        console.log('servidor escuchando en el puerto ' + config.server.port)
+        console.log('servidor escuchando en el puerto ' + port)
     }
 });
 
