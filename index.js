@@ -12,12 +12,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 morgan(':method :url :status :res[content-length] - :response-time ms');
 
-const port = process.env.PORT || config.server.port;
+
 
 //de manera local
 // const config = require("config.json");
 //de manera web
 const config = require("config-web.json");
+
+const port = process.env.PORT || config.server.port;
+
 const controllerUser = require("./controller/userController.js");
 const controllerReservas = require("./controller/reservasController.js");
 const securityController = require("./controller/securityController.js");
