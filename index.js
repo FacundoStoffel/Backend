@@ -12,7 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 morgan(':method :url :status :res[content-length] - :response-time ms');
 
-const config = require("config.json");
+//de manera local
+// const config = require("config.json");
+//de manera web
+const config = require("config-web.json");
 const controllerUser = require("./controller/userController.js");
 const controllerReservas = require("./controller/reservasController.js");
 const securityController = require("./controller/securityController.js");
@@ -37,3 +40,18 @@ app.listen(config.server.port, (err) => {
         console.log('servidor escuchando en el puerto ' + config.server.port)
     }
 });
+
+
+app.get("/", (req, res) => {
+    const htmlResponse = `
+      <html>
+        <head>
+          <title>NodeJs y Express en Vercel</title>
+        </head>
+        <body>
+          <h1>Soy un proyecto Back end en vercel</h1>
+        </body>
+      </html>
+    `;
+    res.send(htmlResponse);
+  });

@@ -55,4 +55,4 @@ CREATE TABLE RESERVAS
   FOREIGN KEY (id_pago) REFERENCES METODO_PAGO(id_pago)
 );
 
-ALTER TABLE reservas ADD UNIQUE INDEX hora_unica (fecha,hora);
+ALTER TABLE RESERVAS ADD UNIQUE INDEX hora_unica (fecha,hora);

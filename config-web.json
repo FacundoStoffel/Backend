@@ -1,0 +1,11 @@
+{
+    "database": {
+        "host": "monorail.proxy.rlwy.net",
+        "user": "root",
+        "password": "cRwqBWuxHQHIFVRDlUgGuHUcHuXDDFNA",
+        "database": "railway"
+    },
+    "server": {
+        "port": 10892
+    }
+}
