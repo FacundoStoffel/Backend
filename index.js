@@ -43,11 +43,7 @@ app.use('/pago', controllerPago);
 //     }
 // });
 
-app.listen(port, (err) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('servidor escuchando en el puerto ' + port)
-    }
-});
+app.listen(port, () => {
+    console.log(`port runing in http://localhost:${port}`);
+  });
 
