@@ -15,11 +15,11 @@ morgan(':method :url :status :res[content-length] - :response-time ms');
 
 
 //de manera local
-// const config = require("config.json");
+const config = require("config.json");
 //de manera web
-const config = require("config-web.json");
+// const config = require("config-web.json");
 
-const port = process.env.PORT || config.server.port;
+// const port = process.env.PORT || config.server.port;
 
 const controllerUser = require("./controller/userController.js");
 const controllerReservas = require("./controller/reservasController.js");
@@ -37,16 +37,16 @@ app.use('/corte', controllerCorte);
 app.use('/pago', controllerPago);
 
 
-//funcion para indicar que el servidor arranco o no
-// app.listen(config.server.port, (err) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log('servidor escuchando en el puerto ' + config.server.port)
-//     }
-// });
+// funcion para indicar que el servidor arranco o no
+app.listen(config.server.port, (err) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('servidor escuchando en el puerto ' + config.server.port)
+    }
+});
 
-app.listen(port, () => {
-    console.log(`port runing in http://localhost:${port}`);
-  });
+// app.listen(port, () => {
+//     console.log(`port runing in http://localhost:${port}`);
+//   });
 
